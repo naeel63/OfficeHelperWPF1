@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OfficeHelperWPF1.Models
 {
-    class OfficeEquipment
+    public class OfficeEquipment
     {
         public int Id { get; set; }
         public string Name { get; set; }
