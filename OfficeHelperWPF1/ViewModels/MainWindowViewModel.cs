@@ -25,6 +25,11 @@ namespace OfficeHelperWPF1.ViewModels
             //set;
         } //= new List<OfficeEquipment> { new() { Id = 1, Name = "some", Status = "s", Type = "t" }, new() { Id = 2, Name = "222", Status = "s2", Type = "t2" } };
 
+        public LambdaCommand OfficeEquipmenAdd
+        {
+
+        }
+
         public MainWindowViewModel()
         {
             _context = new OfficeHelperContext();

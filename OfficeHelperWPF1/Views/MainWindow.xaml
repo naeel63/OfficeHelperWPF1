@@ -13,7 +13,7 @@
     <Grid>
         <DataGrid ItemsSource="{Binding OfficeEquipment}" Margin="0,0,0,55">
         </DataGrid>
-        <Button Content="Добавить" Width="80" Height="20" HorizontalAlignment="Left" Margin="10,395,0,0" VerticalAlignment="Top"/>
+        <Button Content="Добавить" Command="" Width="80" Height="20" HorizontalAlignment="Left" Margin="10,395,0,0" VerticalAlignment="Top"/>
         <Button Content="Изменить" Width="80" Height="20" HorizontalAlignment="Left" Margin="110,395,0,0" VerticalAlignment="Top"/>
         <Button Content="Удалить" Width="80" Height="20" HorizontalAlignment="Left" Margin="210,395,0,0" VerticalAlignment="Top"/>
     </Grid>
