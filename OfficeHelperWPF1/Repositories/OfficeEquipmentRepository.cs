@@ -16,6 +16,7 @@ namespace OfficeHelperWPF1.Repositories
         public OfficeEquipmentRepository()
         {
             _context = new OfficeHelperContext();
+            _context.Database.EnsureCreated();
         }
 
         public bool Save()
@@ -33,7 +34,10 @@ namespace OfficeHelperWPF1.Repositories
         public bool InsertOfficeEquipment(OfficeEquipment officeEquipment)
         {
             _context.OfficeEquipment.Add(officeEquipment);
+            GetOfficeEquipment();
             return Save();
         }
+
+
     }
 }

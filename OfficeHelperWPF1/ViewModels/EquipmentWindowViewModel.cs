@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OfficeHelperWPF1.ViewModels
 {
-    class EquipmentWindowViewModel
+    public class EquipmentWindowViewModel
     {
         public string Name
         {

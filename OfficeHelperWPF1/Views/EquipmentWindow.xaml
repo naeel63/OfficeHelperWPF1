@@ -7,17 +7,15 @@
         xmlns:local="clr-namespace:OfficeHelperWPF1.Views"
         mc:Ignorable="d"
         Title="EquipmentWindow" Height="300" Width="300">
-    <Window.DataContext>
-        <vm:EquipmentWindowViewModel/>
-    </Window.DataContext>
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Название" VerticalAlignment="Top" Width="56"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,31,0,0" TextWrapping="Wrap" Text="Тип" VerticalAlignment="Top" Width="56" Cursor="Arrow"/>
-        <TextBox HorizontalAlignment="Left" Margin="71,9,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="219"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,52,0,0" TextWrapping="Wrap" Text="Статус" VerticalAlignment="Top" Width="56" Cursor="Arrow"/>
-        <TextBox HorizontalAlignment="Left" Margin="71,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="219"/>
-        <TextBox HorizontalAlignment="Left" Margin="71,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="219"/>
-        <Button Content="Добавить" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="56"/>
+        
+        <TextBox HorizontalAlignment="Left" Margin="71,9,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="219"/>
+        <TextBox HorizontalAlignment="Left" Margin="71,32,0,0" TextWrapping="Wrap" Text="{Binding Type}" VerticalAlignment="Top" Width="219"/>
+        <TextBox HorizontalAlignment="Left" Margin="71,55,0,0" TextWrapping="Wrap" Text="{Binding Status}" VerticalAlignment="Top" Width="219"/>
+        <Button Content="Добавить" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="56" Click="Button_Click"/>
 
     </Grid>
 </Window>

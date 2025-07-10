@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using OfficeHelperWPF1.Data;
 using OfficeHelperWPF1.Infrastructure.Commands;
 using OfficeHelperWPF1.Models;
+using OfficeHelperWPF1.Repositories;
 using OfficeHelperWPF1.ViewModels.Base;
 using OfficeHelperWPF1.Views;
 
@@ -18,13 +19,14 @@ namespace OfficeHelperWPF1.ViewModels
     class MainWindowViewModel : ViewModel
     {
         private readonly OfficeHelperContext _context;
+        private readonly OfficeEquipmentRepository _officeEquipmentRepository;
         public ObservableCollection<OfficeEquipment> OfficeEquipmentList
         {
             get
             {
-                _context.Database.EnsureCreated();
+                
                 _context.OfficeEquipment.Load();
-                return _context.OfficeEquipment.Local.ToObservableCollection();
+                return _context.OfficeEquipment.Local.ToObservableCollection(); // перенести в репозиторий
             }
         }
         #region Команды
@@ -41,7 +43,12 @@ namespace OfficeHelperWPF1.ViewModels
 
             if (equipmentWindow.ShowDialog() == true)
             {
-
+                _officeEquipmentRepository.InsertOfficeEquipment(new OfficeEquipment() 
+                { 
+                    Name = equipmentWindow.ViewModel.Name,
+                    Status = equipmentWindow.ViewModel.Status, 
+                    Type = equipmentWindow.ViewModel.Type
+                });
             }
         }
         #endregion
@@ -49,6 +56,7 @@ namespace OfficeHelperWPF1.ViewModels
         public MainWindowViewModel()
         {
             _context = new OfficeHelperContext();
+            _officeEquipmentRepository = new OfficeEquipmentRepository();
             #region Команды
             OfficeEquipmentInsert = new LambdaCommand(OnOfficeEquipmentInsertCommandExecuted, CanOfficeEquipmentInsertCommandExecute);
             #endregion

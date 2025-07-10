@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using OfficeHelperWPF1.ViewModels;
 
 namespace OfficeHelperWPF1.Views
 {
@@ -19,9 +20,17 @@ namespace OfficeHelperWPF1.Views
     /// </summary>
     public partial class EquipmentWindow : Window
     {
+        public EquipmentWindowViewModel ViewModel { get; set; }
         public EquipmentWindow()
         {
             InitializeComponent();
+            ViewModel = new EquipmentWindowViewModel();
+            DataContext = ViewModel;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
         }
     }
 }
