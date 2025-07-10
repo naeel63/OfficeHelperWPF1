@@ -18,7 +18,6 @@ namespace OfficeHelperWPF1.ViewModels
     class MainWindowViewModel : ViewModel
     {
         private readonly OfficeHelperContext _context;
-        private LambdaCommand? insertEquipmentCommand;
         public ObservableCollection<OfficeEquipment> OfficeEquipmentList
         {
             get
@@ -27,9 +26,9 @@ namespace OfficeHelperWPF1.ViewModels
                 _context.OfficeEquipment.Load();
                 return _context.OfficeEquipment.Local.ToObservableCollection();
             }
-            //set;
-        } //= new List<OfficeEquipment> { new() { Id = 1, Name = "some", Status = "s", Type = "t" }, new() { Id = 2, Name = "222", Status = "s2", Type = "t2" } };
-
+        }
+        #region Команды
+        #region OfficeEquipmentInsert
         public ICommand OfficeEquipmentInsert
         {
             get;
@@ -39,18 +38,20 @@ namespace OfficeHelperWPF1.ViewModels
         private void OnOfficeEquipmentInsertCommandExecuted(object officeEquipment)
         {
             EquipmentWindow equipmentWindow = new EquipmentWindow();
-            bool? dialogResult = equipmentWindow.ShowDialog();
 
-            if (dialogResult == true)
+            if (equipmentWindow.ShowDialog() == true)
             {
 
             }
         }
-
+        #endregion
+        #endregion
         public MainWindowViewModel()
         {
             _context = new OfficeHelperContext();
+            #region Команды
             OfficeEquipmentInsert = new LambdaCommand(OnOfficeEquipmentInsertCommandExecuted, CanOfficeEquipmentInsertCommandExecute);
+            #endregion
         }
     }
 }
