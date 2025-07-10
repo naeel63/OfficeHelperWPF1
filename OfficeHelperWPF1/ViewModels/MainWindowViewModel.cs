@@ -62,12 +62,10 @@ namespace OfficeHelperWPF1.ViewModels
             EquipmentWindow equipmentWindow = new EquipmentWindow(typedOfficeEquipment);
             if (equipmentWindow.ShowDialog() == true)
             {
-                _officeEquipmentRepository.UpdateOfficeEquipment(new OfficeEquipment(){
-                    Id = typedOfficeEquipment.Id,
-                    Name = equipmentWindow.ViewModel.Name,
-                    Type = equipmentWindow.ViewModel.Type,
-                    Status = equipmentWindow.ViewModel.Status
-                });
+                typedOfficeEquipment.Name = equipmentWindow.ViewModel.Name;
+                typedOfficeEquipment.Type = equipmentWindow.ViewModel.Type;
+                typedOfficeEquipment.Status = equipmentWindow.ViewModel.Status;
+                _officeEquipmentRepository.UpdateOfficeEquipment(typedOfficeEquipment);
             }
         }
         private bool CanOfficeEquipmentUpdateCommandExecute(object p) => true;
