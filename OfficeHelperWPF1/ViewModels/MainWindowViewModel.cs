@@ -24,9 +24,7 @@ namespace OfficeHelperWPF1.ViewModels
         {
             get
             {
-                
-                _context.OfficeEquipment.Load();
-                return _context.OfficeEquipment.Local.ToObservableCollection(); // перенести в репозиторий
+                return _officeEquipmentRepository.GetOfficeEquipment();
             }
         }
         #region Команды

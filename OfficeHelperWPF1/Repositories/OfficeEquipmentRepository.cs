@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using OfficeHelperWPF1.Data;
 using OfficeHelperWPF1.Interfaces;
 using OfficeHelperWPF1.Models;
@@ -24,11 +26,10 @@ namespace OfficeHelperWPF1.Repositories
             return _context.SaveChanges() > 0 ? true : false;
         }
 
-        public List<OfficeEquipment> GetOfficeEquipment()
+        public ObservableCollection<OfficeEquipment> GetOfficeEquipment()
         {
-            return _context
-                    .OfficeEquipment
-                    .ToList();
+            _context.OfficeEquipment.Load();
+            return _context.OfficeEquipment.Local.ToObservableCollection();
         }
 
         public bool InsertOfficeEquipment(OfficeEquipment officeEquipment)

@@ -11,7 +11,7 @@
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <DataGrid ItemsSource="{Binding OfficeEquipment}" Margin="0,0,0,55">
+        <DataGrid ItemsSource="{Binding OfficeEquipmentList}" Margin="0,0,0,55">
         </DataGrid>
         <Button Content="Добавить" Command="{Binding OfficeEquipmentInsert}" Width="80" Height="20" HorizontalAlignment="Left" Margin="10,395,0,0" VerticalAlignment="Top"/>
         <Button Content="Изменить" Width="80" Height="20" HorizontalAlignment="Left" Margin="110,395,0,0" VerticalAlignment="Top"/>
