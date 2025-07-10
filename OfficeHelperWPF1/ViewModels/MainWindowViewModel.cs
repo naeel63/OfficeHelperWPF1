@@ -58,15 +58,18 @@ namespace OfficeHelperWPF1.ViewModels
         }
         private void OnOfficeEquipmentUpdateCommandExecuted(object officeEquipment)
         {
-            OfficeEquipment typedOfficeEquipment = (OfficeEquipment)officeEquipment;
-            EquipmentWindow equipmentWindow = new EquipmentWindow(typedOfficeEquipment);
-            if (equipmentWindow.ShowDialog() == true)
+            if (officeEquipment is OfficeEquipment typedOfficeEquipment)
             {
-                typedOfficeEquipment.Name = equipmentWindow.ViewModel.Name;
-                typedOfficeEquipment.Type = equipmentWindow.ViewModel.Type;
-                typedOfficeEquipment.Status = equipmentWindow.ViewModel.Status;
-                _officeEquipmentRepository.UpdateOfficeEquipment(typedOfficeEquipment);
+                EquipmentWindow equipmentWindow = new EquipmentWindow(typedOfficeEquipment);
+                if (equipmentWindow.ShowDialog() == true)
+                {
+                    typedOfficeEquipment.Name = equipmentWindow.ViewModel.Name;
+                    typedOfficeEquipment.Type = equipmentWindow.ViewModel.Type;
+                    typedOfficeEquipment.Status = equipmentWindow.ViewModel.Status;
+                    _officeEquipmentRepository.UpdateOfficeEquipment(typedOfficeEquipment);
+                }
             }
+            return;
         }
         private bool CanOfficeEquipmentUpdateCommandExecute(object p) => true;
         #endregion
