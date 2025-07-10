@@ -10,6 +10,6 @@ namespace OfficeHelperWPF1.Interfaces
     public interface IOfficeEquipmentRepository
     {
         public List<OfficeEquipment> GetOfficeEquipment();
-        
+        public bool InsertOfficeEquipment(OfficeEquipment officeEquipment);
     }
 }

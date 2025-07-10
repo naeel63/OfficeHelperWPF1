@@ -18,11 +18,22 @@ namespace OfficeHelperWPF1.Repositories
             _context = new OfficeHelperContext();
         }
 
+        public bool Save()
+        {
+            return _context.SaveChanges() > 0 ? true : false;
+        }
+
         public List<OfficeEquipment> GetOfficeEquipment()
         {
             return _context
                     .OfficeEquipment
                     .ToList();
+        }
+
+        public bool InsertOfficeEquipment(OfficeEquipment officeEquipment)
+        {
+            _context.OfficeEquipment.Add(officeEquipment);
+            return Save();
         }
     }
 }
