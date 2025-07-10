@@ -39,6 +39,10 @@ namespace OfficeHelperWPF1.Repositories
             return Save();
         }
 
-
+        public bool UpdateOfficeEquipment(OfficeEquipment officeEquipment)
+        {
+            _context.Update(officeEquipment);
+            return Save();
+        }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using OfficeHelperWPF1.Models;
 using OfficeHelperWPF1.ViewModels;
 
 namespace OfficeHelperWPF1.Views
@@ -25,6 +26,13 @@ namespace OfficeHelperWPF1.Views
         {
             InitializeComponent();
             ViewModel = new EquipmentWindowViewModel();
+            DataContext = ViewModel;
+        }
+
+        public EquipmentWindow(OfficeEquipment officeEquipment)
+        {
+            InitializeComponent();
+            ViewModel = new EquipmentWindowViewModel(officeEquipment);
             DataContext = ViewModel;
         }
 

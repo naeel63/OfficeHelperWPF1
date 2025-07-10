@@ -18,7 +18,7 @@ namespace OfficeHelperWPF1.ViewModels
 {
     class MainWindowViewModel : ViewModel
     {
-        private readonly OfficeHelperContext _context;
+
         private readonly OfficeEquipmentRepository _officeEquipmentRepository;
         public ObservableCollection<OfficeEquipment> OfficeEquipmentList
         {
@@ -28,8 +28,8 @@ namespace OfficeHelperWPF1.ViewModels
             }
         }
         #region Команды
-        #region OfficeEquipmentInsert
-        public ICommand OfficeEquipmentInsert
+        #region OfficeEquipmentInsertCommand
+        public ICommand OfficeEquipmentInsertCommand
         {
             get;
         }
@@ -49,14 +49,36 @@ namespace OfficeHelperWPF1.ViewModels
                 });
             }
         }
+        
+        #endregion
+        #region OfficeEquipmentUpdateCommand
+        public ICommand OfficeEquipmentUpdateCommand
+        {
+            get;
+        }
+        private void OnOfficeEquipmentUpdateCommandExecuted(object officeEquipment)
+        {
+            OfficeEquipment typedOfficeEquipment = (OfficeEquipment)officeEquipment;
+            EquipmentWindow equipmentWindow = new EquipmentWindow(typedOfficeEquipment);
+            if (equipmentWindow.ShowDialog() == true)
+            {
+                _officeEquipmentRepository.UpdateOfficeEquipment(new OfficeEquipment(){
+                    Id = typedOfficeEquipment.Id,
+                    Name = equipmentWindow.ViewModel.Name,
+                    Type = equipmentWindow.ViewModel.Type,
+                    Status = equipmentWindow.ViewModel.Status
+                });
+            }
+        }
+        private bool CanOfficeEquipmentUpdateCommandExecute(object p) => true;
         #endregion
         #endregion
         public MainWindowViewModel()
         {
-            _context = new OfficeHelperContext();
             _officeEquipmentRepository = new OfficeEquipmentRepository();
             #region Команды
-            OfficeEquipmentInsert = new LambdaCommand(OnOfficeEquipmentInsertCommandExecuted, CanOfficeEquipmentInsertCommandExecute);
+            OfficeEquipmentInsertCommand = new LambdaCommand(OnOfficeEquipmentInsertCommandExecuted, CanOfficeEquipmentInsertCommandExecute);
+            OfficeEquipmentUpdateCommand = new LambdaCommand(OnOfficeEquipmentUpdateCommandExecuted, CanOfficeEquipmentUpdateCommandExecute);
             #endregion
         }
     }

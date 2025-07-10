@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OfficeHelperWPF1.Models;
 
 namespace OfficeHelperWPF1.ViewModels
 {
@@ -22,6 +23,19 @@ namespace OfficeHelperWPF1.ViewModels
         {
             get; 
             set;
+        }
+
+        public EquipmentWindowViewModel()
+        {
+            Name = "";
+            Type = "";
+            Status = "";
+        }
+        public EquipmentWindowViewModel(OfficeEquipment officeEquipment)
+        {
+            Name = officeEquipment.Name;
+            Type = officeEquipment.Type;
+            Status = officeEquipment.Status;
         }
     }
 }
