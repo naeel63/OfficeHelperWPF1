@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,11 +26,7 @@ namespace OfficeHelperWPF1.ViewModels
         {
             get
             {
-                return officeEquipmentList;//_officeEquipmentRepository.GetOfficeEquipment();
-            }
-            set
-            {
-                officeEquipmentList = value;
+                return officeEquipmentList;
             }
         }
         #region Команды
@@ -40,7 +37,7 @@ namespace OfficeHelperWPF1.ViewModels
         }
 
         private bool CanOfficeEquipmentInsertCommandExecute(object p) => true;
-        private void OnOfficeEquipmentInsertCommandExecuted(object officeEquipment)
+        private void OnOfficeEquipmentInsertCommandExecuted(object p)
         {
             EquipmentWindow equipmentWindow = new EquipmentWindow();
 
@@ -78,6 +75,33 @@ namespace OfficeHelperWPF1.ViewModels
         }
         private bool CanOfficeEquipmentUpdateCommandExecute(object p) => true;
         #endregion
+        #region OfficeEquipmentDeleteCommand
+        public ICommand OfficeEquipmentDeleteCommand
+        {
+            get;
+        }
+
+        public bool CanOfficeEquipmentDeleteCommandExecute(object p) => p is not null ? true : false;
+        public void OnOfficeEquipmentDeleteCommandExecuted(object officeEquipmentsToDelete)
+        {
+            ICollection typedCollectionOfSelectedItems = (ICollection)officeEquipmentsToDelete;
+            if ( typedCollectionOfSelectedItems.Count == 0)
+            {
+                MessageBox.Show("Выберите удаляемые элементы", "Ошибка", MessageBoxButton.OK);
+                return;
+            }
+
+            List<OfficeEquipment> typedOfficeEquipmentsToDelete = typedCollectionOfSelectedItems.Cast<OfficeEquipment>().ToList();
+            if (true)
+            {
+                if (MessageBox.Show($"Вы точно хотите удалить следующие элементы?(Количество удаляемых элементов: {typedOfficeEquipmentsToDelete.Count()} шт.", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    _officeEquipmentRepository.DeleteOfficeEquipment(typedOfficeEquipmentsToDelete);
+                }
+            }
+        }
+
+        #endregion
         #endregion
         public MainWindowViewModel()
         {
@@ -87,6 +111,7 @@ namespace OfficeHelperWPF1.ViewModels
             #region Команды
             OfficeEquipmentInsertCommand = new LambdaCommand(OnOfficeEquipmentInsertCommandExecuted, CanOfficeEquipmentInsertCommandExecute);
             OfficeEquipmentUpdateCommand = new LambdaCommand(OnOfficeEquipmentUpdateCommandExecuted, CanOfficeEquipmentUpdateCommandExecute);
+            OfficeEquipmentDeleteCommand = new LambdaCommand(OnOfficeEquipmentDeleteCommandExecuted, CanOfficeEquipmentDeleteCommandExecute);
             #endregion
         }
     }

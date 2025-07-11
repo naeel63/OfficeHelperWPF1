@@ -44,5 +44,10 @@ namespace OfficeHelperWPF1.Repositories
             _context.Update(officeEquipment);
             return Save();
         }
+        public bool DeleteOfficeEquipment(List<OfficeEquipment> officeEquipmentList)
+        {
+            _context.OfficeEquipment.RemoveRange(officeEquipmentList);
+            return Save();
+        }
     }
 }

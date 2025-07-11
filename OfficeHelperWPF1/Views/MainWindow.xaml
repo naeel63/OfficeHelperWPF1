@@ -18,6 +18,9 @@
                 Command="{Binding OfficeEquipmentUpdateCommand}" 
                 CommandParameter="{Binding ElementName=OfficeEquipmentDataGrid, Path=SelectedItem}" 
                 Width="80" Height="20" HorizontalAlignment="Left" Margin="110,395,0,0" VerticalAlignment="Top"/>
-        <Button Content="Удалить" Width="80" Height="20" HorizontalAlignment="Left" Margin="210,395,0,0" VerticalAlignment="Top"/>
+        <Button Content="Удалить" 
+                Command="{Binding OfficeEquipmentDeleteCommand}" 
+                CommandParameter="{Binding ElementName=OfficeEquipmentDataGrid, Path=SelectedItems}"
+                Width="80" Height="20" HorizontalAlignment="Left" Margin="210,395,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
