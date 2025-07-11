@@ -65,7 +65,7 @@ namespace OfficeHelperWPF1.ViewModels
                         Type = equipmentWindow.ViewModel.Type
                     });
                 }
-                catch(Exception ex)
+                catch(ArgumentException ex)
                 {
                     MessageBox.Show(ex.Message, "Ошибка");
                 }
@@ -87,15 +87,22 @@ namespace OfficeHelperWPF1.ViewModels
             //приводим передаваемый SelectedItem к типу OfficeEquipment
             if (selectedItem is OfficeEquipment typedOfficeEquipment) 
             {
-                EquipmentWindow equipmentWindow = new EquipmentWindow(typedOfficeEquipment);
-
-                if (equipmentWindow.ShowDialog() == true)
+                try
                 {
-                    typedOfficeEquipment.Name = equipmentWindow.ViewModel.Name;
-                    typedOfficeEquipment.Type = equipmentWindow.ViewModel.Type;
-                    typedOfficeEquipment.Status = equipmentWindow.ViewModel.Status;
+                    EquipmentWindow equipmentWindow = new EquipmentWindow(typedOfficeEquipment);
 
-                    _officeEquipmentRepository.UpdateOfficeEquipment(typedOfficeEquipment);
+                    if (equipmentWindow.ShowDialog() == true)
+                    {
+                        typedOfficeEquipment.Name = equipmentWindow.ViewModel.Name;
+                        typedOfficeEquipment.Type = equipmentWindow.ViewModel.Type;
+                        typedOfficeEquipment.Status = equipmentWindow.ViewModel.Status;
+
+                        _officeEquipmentRepository.UpdateOfficeEquipment(typedOfficeEquipment);
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка");
                 }
             }
         }
@@ -121,15 +128,22 @@ namespace OfficeHelperWPF1.ViewModels
                 return;
             }
 
-            // Приводим все элементы typedCollectionOfSelectedItems к OfficeEquipment и приводим саму коллекцию к List
-            List<OfficeEquipment> typedOfficeEquipmentsToDelete = typedCollectionOfSelectedItems.Cast<OfficeEquipment>().ToList();            
-            
-            if (MessageBox.Show(
-                $"Вы точно хотите удалить следующие элементы? (Количество удаляемых элементов: {typedOfficeEquipmentsToDelete.Count()} шт.)"
-                , "Внимание"
-                , MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            try
             {
-                _officeEquipmentRepository.DeleteOfficeEquipment(typedOfficeEquipmentsToDelete);
+                // Приводим все элементы typedCollectionOfSelectedItems к OfficeEquipment и приводим саму коллекцию к List
+                List<OfficeEquipment> typedOfficeEquipmentsToDelete = typedCollectionOfSelectedItems.Cast<OfficeEquipment>().ToList();
+
+                if (MessageBox.Show(
+                    $"Вы точно хотите удалить следующие элементы? (Количество удаляемых элементов: {typedOfficeEquipmentsToDelete.Count()} шт.)"
+                    , "Внимание"
+                    , MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    _officeEquipmentRepository.DeleteOfficeEquipment(typedOfficeEquipmentsToDelete);
+                }
+            }
+            catch (InvalidCastException ex)
+            {
+                MessageBox.Show($"Ошибка при приведении типа выбранных элементов к типу офисного инвентаря: {ex.Message}", "Ошибка");
             }
         }
 
