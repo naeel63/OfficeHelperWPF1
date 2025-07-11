@@ -26,6 +26,7 @@ namespace OfficeHelperWPF1.Models
             get => name;
             set
             {
+                value = value.Trim();
                 if (value == null || value == "") 
                 { 
                     throw new ArgumentException("Вы не указали название офисного оборудования"); 
@@ -42,6 +43,7 @@ namespace OfficeHelperWPF1.Models
             get => type;
             set
             {
+                value = value.Trim();
                 if (value != "Принтер"
                     && value != "Сканер"
                     && value != "Монитор")
@@ -60,9 +62,10 @@ namespace OfficeHelperWPF1.Models
             get => status;
             set
             {
+                value = value.Trim();
                 if (value != "В пользовании"
                     && value != "На складе"
-                    && value != "В ремонте")
+                    && value != "На ремонте")
                 {
                     throw new ArgumentException($"Вы указали неправильный статус офисного оборудование({value})");
                 }
