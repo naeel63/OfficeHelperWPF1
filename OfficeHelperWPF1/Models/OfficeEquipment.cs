@@ -10,10 +10,17 @@ namespace OfficeHelperWPF1.Models
 {
     public class OfficeEquipment : INotifyPropertyChanged
     {
-        string? name;
-        string? type;
-        string? status;
+        private string? name;
+        private string? type;
+        private string? status;
+
+        /// <summary>
+        /// ID офисного оборудования
+        /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// Название офисного оборудования
+        /// </summary>
         public string Name
         {
             get => name;
@@ -23,6 +30,9 @@ namespace OfficeHelperWPF1.Models
                 OnPropertyChanged();
             }
         }
+        /// <summary>
+        /// Тип офисного оборудования
+        /// </summary>
         public string Type
         {
             get => type;
@@ -32,7 +42,9 @@ namespace OfficeHelperWPF1.Models
                 OnPropertyChanged();
             }
         }
-        
+        /// <summary>
+        /// Статус офисного оборудования
+        /// </summary>
         public string Status
         {
             get => status;

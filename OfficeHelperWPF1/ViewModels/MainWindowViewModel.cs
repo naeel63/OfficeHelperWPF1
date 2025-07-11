@@ -19,9 +19,19 @@ namespace OfficeHelperWPF1.ViewModels
 {
     class MainWindowViewModel : ViewModel
     {
-
+        /// <summary>
+        /// Репозиторй для работы с БД
+        /// </summary>
         private readonly OfficeEquipmentRepository _officeEquipmentRepository;
-        public ObservableCollection<OfficeEquipment> officeEquipmentList;
+        /// <summary>
+        /// Коллекция офисного оборудования, которую будет отображать ДатаГрид
+        /// </summary>
+        private ObservableCollection<OfficeEquipment> officeEquipmentList;
+
+
+        /// <summary>
+        /// Коллекция офисного оборудования
+        /// </summary>
         public ObservableCollection<OfficeEquipment> OfficeEquipmentList
         {
             get
@@ -31,6 +41,9 @@ namespace OfficeHelperWPF1.ViewModels
         }
         #region Команды
         #region OfficeEquipmentInsertCommand
+        /// <summary>
+        /// Команда добавления офисного оборудования в БД
+        /// </summary>
         public ICommand OfficeEquipmentInsertCommand
         {
             get;
@@ -54,60 +67,73 @@ namespace OfficeHelperWPF1.ViewModels
         
         #endregion
         #region OfficeEquipmentUpdateCommand
+        /// <summary>
+        /// Команда редактирования выбранного офисного оборудования
+        /// </summary>
         public ICommand OfficeEquipmentUpdateCommand
         {
             get;
         }
-        private void OnOfficeEquipmentUpdateCommandExecuted(object officeEquipment)
+        private bool CanOfficeEquipmentUpdateCommandExecute(object p) => true;
+        private void OnOfficeEquipmentUpdateCommandExecuted(object selectedItem)
         {
-            if (officeEquipment is OfficeEquipment typedOfficeEquipment)
+            //приводим передаваемый SelectedItem к типу OfficeEquipment
+            if (selectedItem is OfficeEquipment typedOfficeEquipment) 
             {
                 EquipmentWindow equipmentWindow = new EquipmentWindow(typedOfficeEquipment);
+
                 if (equipmentWindow.ShowDialog() == true)
                 {
                     typedOfficeEquipment.Name = equipmentWindow.ViewModel.Name;
                     typedOfficeEquipment.Type = equipmentWindow.ViewModel.Type;
                     typedOfficeEquipment.Status = equipmentWindow.ViewModel.Status;
+
                     _officeEquipmentRepository.UpdateOfficeEquipment(typedOfficeEquipment);
                 }
             }
-            return;
         }
-        private bool CanOfficeEquipmentUpdateCommandExecute(object p) => true;
         #endregion
         #region OfficeEquipmentDeleteCommand
+        /// <summary>
+        /// Команда удаления выбранных офисных оборудований
+        /// </summary>
         public ICommand OfficeEquipmentDeleteCommand
         {
             get;
         }
 
-        public bool CanOfficeEquipmentDeleteCommandExecute(object p) => p is not null ? true : false;
-        public void OnOfficeEquipmentDeleteCommandExecuted(object officeEquipmentsToDelete)
+        public bool CanOfficeEquipmentDeleteCommandExecute(object p) => true;
+        public void OnOfficeEquipmentDeleteCommandExecuted(object selectedItems)
         {
-            ICollection typedCollectionOfSelectedItems = (ICollection)officeEquipmentsToDelete;
+            // Приводим SelectedItems к ICollection
+            ICollection typedCollectionOfSelectedItems = (ICollection)selectedItems; 
+
             if ( typedCollectionOfSelectedItems.Count == 0)
             {
                 MessageBox.Show("Выберите удаляемые элементы", "Ошибка", MessageBoxButton.OK);
                 return;
             }
 
-            List<OfficeEquipment> typedOfficeEquipmentsToDelete = typedCollectionOfSelectedItems.Cast<OfficeEquipment>().ToList();
-            if (true)
+            // Приводим все элементы typedCollectionOfSelectedItems к OfficeEquipment и приводим саму коллекцию к List
+            List<OfficeEquipment> typedOfficeEquipmentsToDelete = typedCollectionOfSelectedItems.Cast<OfficeEquipment>().ToList();            
+            
+            if (MessageBox.Show(
+                $"Вы точно хотите удалить следующие элементы? (Количество удаляемых элементов: {typedOfficeEquipmentsToDelete.Count()} шт.)"
+                , "Внимание"
+                , MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                if (MessageBox.Show($"Вы точно хотите удалить следующие элементы?(Количество удаляемых элементов: {typedOfficeEquipmentsToDelete.Count()} шт.", "Внимание", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    _officeEquipmentRepository.DeleteOfficeEquipment(typedOfficeEquipmentsToDelete);
-                }
+                _officeEquipmentRepository.DeleteOfficeEquipment(typedOfficeEquipmentsToDelete);
             }
         }
 
         #endregion
         #endregion
+
         public MainWindowViewModel()
         {
-
             _officeEquipmentRepository = new OfficeEquipmentRepository();
             officeEquipmentList = _officeEquipmentRepository.GetOfficeEquipment();
+
             #region Команды
             OfficeEquipmentInsertCommand = new LambdaCommand(OnOfficeEquipmentInsertCommandExecuted, CanOfficeEquipmentInsertCommandExecute);
             OfficeEquipmentUpdateCommand = new LambdaCommand(OnOfficeEquipmentUpdateCommandExecuted, CanOfficeEquipmentUpdateCommandExecute);

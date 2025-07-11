@@ -21,14 +21,23 @@ namespace OfficeHelperWPF1.Views
     /// </summary>
     public partial class EquipmentWindow : Window
     {
+        /// <summary>
+        /// DataContext у окна, связанного с изменением инвентаря
+        /// </summary>
         public EquipmentWindowViewModel ViewModel { get; set; }
+        /// <summary>
+        /// Конструктор для создания окна добавления инвентаря
+        /// </summary>
         public EquipmentWindow()
         {
             InitializeComponent();
             ViewModel = new EquipmentWindowViewModel();
             DataContext = ViewModel;
         }
-
+        /// <summary>
+        /// Конструктор для создания окна изменения инвентаря
+        /// </summary>
+        /// <param name="officeEquipment">Изменяемый инвентарь</param>
         public EquipmentWindow(OfficeEquipment officeEquipment)
         {
             InitializeComponent();

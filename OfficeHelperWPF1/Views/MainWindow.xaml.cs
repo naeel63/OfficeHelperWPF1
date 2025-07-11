@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OfficeHelperWPF1.ViewModels;
 
 namespace OfficeHelperWPF1.Views;
 
@@ -18,6 +19,7 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
+        DataContext = new MainWindowViewModel();
         InitializeComponent();
     }
 }
