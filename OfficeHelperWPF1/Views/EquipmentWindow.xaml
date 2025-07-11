@@ -15,7 +15,7 @@
         <TextBox HorizontalAlignment="Left" Margin="71,9,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="219"/>
         <TextBox HorizontalAlignment="Left" Margin="71,32,0,0" TextWrapping="Wrap" Text="{Binding Type}" VerticalAlignment="Top" Width="219"/>
         <TextBox HorizontalAlignment="Left" Margin="71,55,0,0" TextWrapping="Wrap" Text="{Binding Status}" VerticalAlignment="Top" Width="219"/>
-        <Button Content="Добавить" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="56" Click="Button_Click"/>
+        <Button Content="{Binding ButtonText}" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="Auto" Height="20" Click="Button_Click"/>
 
     </Grid>
 </Window>

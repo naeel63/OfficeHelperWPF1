@@ -34,23 +34,35 @@ namespace OfficeHelperWPF1.ViewModels
             set;
         }
         /// <summary>
-        /// Конструктор для добавления инвентаря
+        /// Текст кнопки
         /// </summary>
-        public EquipmentWindowViewModel()
+        public string ButtonText
+        {
+            get;
+            set;
+        }
+        /// <summary>
+        /// Конструктор для создания модального окна инвентаря
+        /// </summary>
+        /// <param name="buttonText">Текст кнопки</param>
+        public EquipmentWindowViewModel(string buttonText)
         {
             Name = "";
             Type = "";
             Status = "";
+            ButtonText = buttonText;
         }
         /// <summary>
-        /// Конструк для изменения инвентаря
+        /// Конструктор для создания модального окна инвентаря
         /// </summary>
-        /// <param name="officeEquipment"></param>
-        public EquipmentWindowViewModel(OfficeEquipment officeEquipment)
+        /// <param name="buttonText">Текст кнопки</param>
+        /// <param name="officeEquipment">Офисное оборудование, которое будет отображено в окне</param>
+        public EquipmentWindowViewModel(string buttonText,OfficeEquipment officeEquipment)
         {
             Name = officeEquipment.Name;
             Type = officeEquipment.Type;
             Status = officeEquipment.Status;
+            ButtonText = buttonText;
         }
     }
 }

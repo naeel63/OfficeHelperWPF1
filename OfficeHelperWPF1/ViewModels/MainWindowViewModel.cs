@@ -52,7 +52,7 @@ namespace OfficeHelperWPF1.ViewModels
         private bool CanOfficeEquipmentInsertCommandExecute(object p) => true;
         private void OnOfficeEquipmentInsertCommandExecuted(object p)
         {
-            EquipmentWindow equipmentWindow = new EquipmentWindow();
+            EquipmentWindow equipmentWindow = new EquipmentWindow("Добавить");
 
             if (equipmentWindow.ShowDialog() == true)
             {
@@ -89,7 +89,7 @@ namespace OfficeHelperWPF1.ViewModels
             {
                 try
                 {
-                    EquipmentWindow equipmentWindow = new EquipmentWindow(typedOfficeEquipment);
+                    EquipmentWindow equipmentWindow = new EquipmentWindow("Изменить", typedOfficeEquipment);
 
                     if (equipmentWindow.ShowDialog() == true)
                     {

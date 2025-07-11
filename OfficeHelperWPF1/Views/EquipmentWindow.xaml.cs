@@ -28,20 +28,20 @@ namespace OfficeHelperWPF1.Views
         /// <summary>
         /// Конструктор для создания окна добавления инвентаря
         /// </summary>
-        public EquipmentWindow()
+        public EquipmentWindow(string textButton)
         {
             InitializeComponent();
-            ViewModel = new EquipmentWindowViewModel();
+            ViewModel = new EquipmentWindowViewModel(textButton);
             DataContext = ViewModel;
         }
         /// <summary>
         /// Конструктор для создания окна изменения инвентаря
         /// </summary>
         /// <param name="officeEquipment">Изменяемый инвентарь</param>
-        public EquipmentWindow(OfficeEquipment officeEquipment)
+        public EquipmentWindow(string textButton, OfficeEquipment officeEquipment)
         {
             InitializeComponent();
-            ViewModel = new EquipmentWindowViewModel(officeEquipment);
+            ViewModel = new EquipmentWindowViewModel(textButton, officeEquipment);
             DataContext = ViewModel;
         }
 
