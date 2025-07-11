@@ -14,24 +14,24 @@
             <Button 
                 Content="Добавить" 
                 Command="{Binding OfficeEquipmentInsertCommand}" 
-                Width="80" 
-                Height="20" 
+                Width="100" 
+                Height="Auto" 
                 DockPanel.Dock="Top"
                 Margin="10"/>
             <Button 
                 Content="Изменить" 
                 Command="{Binding OfficeEquipmentUpdateCommand}" 
                 CommandParameter="{Binding ElementName=OfficeEquipmentDataGrid, Path=SelectedItem}" 
-                Width="80" 
-                Height="20" 
+                Width="100" 
+                Height="Auto" 
                 DockPanel.Dock="Top"
                 Margin="10 0 10 10"/>
             <Button 
                 Content="Удалить" 
                 Command="{Binding OfficeEquipmentDeleteCommand}" 
                 CommandParameter="{Binding ElementName=OfficeEquipmentDataGrid, Path=SelectedItems}"
-                Width="80" 
-                Height="20" 
+                Width="100" 
+                Height="Auto" 
                 DockPanel.Dock="Top"
                 Margin="10 0 10 10"/>
             <Grid></Grid>
