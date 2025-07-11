@@ -21,5 +21,6 @@ public partial class MainWindow : Window
     {
         DataContext = new MainWindowViewModel();
         InitializeComponent();
+        MinWidth = ActualWidth;
     }
 }
