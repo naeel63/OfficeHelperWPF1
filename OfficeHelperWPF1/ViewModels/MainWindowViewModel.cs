@@ -20,11 +20,16 @@ namespace OfficeHelperWPF1.ViewModels
     {
 
         private readonly OfficeEquipmentRepository _officeEquipmentRepository;
+        public ObservableCollection<OfficeEquipment> officeEquipmentList;
         public ObservableCollection<OfficeEquipment> OfficeEquipmentList
         {
             get
             {
-                return _officeEquipmentRepository.GetOfficeEquipment();
+                return officeEquipmentList;//_officeEquipmentRepository.GetOfficeEquipment();
+            }
+            set
+            {
+                officeEquipmentList = value;
             }
         }
         #region Команды
@@ -76,7 +81,9 @@ namespace OfficeHelperWPF1.ViewModels
         #endregion
         public MainWindowViewModel()
         {
+
             _officeEquipmentRepository = new OfficeEquipmentRepository();
+            officeEquipmentList = _officeEquipmentRepository.GetOfficeEquipment();
             #region Команды
             OfficeEquipmentInsertCommand = new LambdaCommand(OnOfficeEquipmentInsertCommandExecuted, CanOfficeEquipmentInsertCommandExecute);
             OfficeEquipmentUpdateCommand = new LambdaCommand(OnOfficeEquipmentUpdateCommandExecuted, CanOfficeEquipmentUpdateCommandExecute);
