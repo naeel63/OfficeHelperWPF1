@@ -6,16 +6,84 @@
         xmlns:vm="clr-namespace:OfficeHelperWPF1.ViewModels"
         xmlns:local="clr-namespace:OfficeHelperWPF1.Views"
         mc:Ignorable="d"
-        Title="EquipmentWindow" Height="300" Width="300">
-    <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Название" VerticalAlignment="Top" Width="56"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,31,0,0" TextWrapping="Wrap" Text="Тип" VerticalAlignment="Top" Width="56" Cursor="Arrow"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,52,0,0" TextWrapping="Wrap" Text="Статус" VerticalAlignment="Top" Width="56" Cursor="Arrow"/>
-        
-        <TextBox HorizontalAlignment="Left" Margin="71,9,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="219"/>
-        <TextBox HorizontalAlignment="Left" Margin="71,32,0,0" TextWrapping="Wrap" Text="{Binding Type}" VerticalAlignment="Top" Width="219"/>
-        <TextBox HorizontalAlignment="Left" Margin="71,55,0,0" TextWrapping="Wrap" Text="{Binding Status}" VerticalAlignment="Top" Width="219"/>
-        <Button Content="{Binding ButtonText}" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="Auto" Height="20" Click="Button_Click"/>
-
-    </Grid>
+        Title="EquipmentWindow" 
+        SizeToContent="WidthAndHeight">
+    <!--Style="{StaticResource MaterialDesignWindow}"-->
+    <Window.Resources>
+        <Style x:Key="NameOfChangingProperties" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignTextBlock}">
+            <Setter Property="Control.FontSize" Value="17" />
+            <Setter Property="Control.Margin" Value="10" />
+            <Setter Property="Control.HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style x:Key="ChangingProperties" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+            <Setter Property="Control.FontSize" Value="17" />
+            <Setter Property="Control.Margin" Value="10" />
+            <Setter Property="Control.Width" Value="220"/>
+            <Setter Property="DockPanel.Dock" Value="Left"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <DockPanel
+            DockPanel.Dock="Top">
+            <DockPanel
+            DockPanel.Dock="Top">
+                <Grid
+                Width="100"
+                DockPanel.Dock="Left">
+                    <TextBlock 
+                    Text="Название:" 
+                    Style="{StaticResource NameOfChangingProperties}"
+                />
+                </Grid>
+                <TextBox 
+                Text="{Binding Name}" 
+                Style="{StaticResource ChangingProperties}"
+            />
+            </DockPanel>
+            <DockPanel
+            DockPanel.Dock="Top">
+                <Grid
+                Width="100"
+                DockPanel.Dock="Left">
+                    <TextBlock 
+                    Text="Тип:" 
+                    Margin="10 0 10 10" 
+                    Style="{StaticResource NameOfChangingProperties}"
+                    />
+                </Grid>
+                <TextBox 
+                Text="{Binding Type}" 
+                Margin="10 0 10 10" 
+                Style="{StaticResource ChangingProperties}"/>
+            </DockPanel>
+            <DockPanel
+            DockPanel.Dock="Top">
+                <Grid
+                    Width="100"
+                    DockPanel.Dock="Left">
+                    <TextBlock 
+                        Margin="10 0 10 10" 
+                        Text="Статус:" 
+                        Style="{StaticResource NameOfChangingProperties}"
+                    />
+                </Grid>
+                <TextBox 
+                    Margin="10 0 10 10" 
+                    Text="{Binding Status}" 
+                    Style="{StaticResource ChangingProperties}"
+                />
+            </DockPanel>
+        </DockPanel>
+        <Button 
+            Content="{Binding ButtonText}" 
+            HorizontalAlignment="Left" 
+            Margin="10" 
+            VerticalAlignment="Top" 
+            FontSize="17"
+            Width="Auto" 
+            Height="Auto" 
+            Click="Button_Click"
+            DockPanel.Dock="Top"
+        />
+    </DockPanel>
 </Window>
