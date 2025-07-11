@@ -56,12 +56,19 @@ namespace OfficeHelperWPF1.ViewModels
 
             if (equipmentWindow.ShowDialog() == true)
             {
-                _officeEquipmentRepository.InsertOfficeEquipment(new OfficeEquipment() 
-                { 
-                    Name = equipmentWindow.ViewModel.Name,
-                    Status = equipmentWindow.ViewModel.Status, 
-                    Type = equipmentWindow.ViewModel.Type
-                });
+                try
+                {
+                    _officeEquipmentRepository.InsertOfficeEquipment(new OfficeEquipment()
+                    {
+                        Name = equipmentWindow.ViewModel.Name,
+                        Status = equipmentWindow.ViewModel.Status,
+                        Type = equipmentWindow.ViewModel.Type
+                    });
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка");
+                }
             }
         }
         

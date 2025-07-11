@@ -28,7 +28,7 @@ namespace OfficeHelperWPF1.Models
             {
                 if (value == null || value == "") 
                 { 
-                    throw new Exception("Вы не указали название офисного оборудования"); 
+                    throw new ArgumentException("Вы не указали название офисного оборудования"); 
                 }
                 name = value;
                 OnPropertyChanged();
@@ -46,7 +46,7 @@ namespace OfficeHelperWPF1.Models
                     && value != "Сканер"
                     && value != "Монитор")
                 {
-                    throw new Exception($"Вы указали неправильный тип офисного оборудование({value})");
+                    throw new ArgumentException($"Вы указали неправильный тип офисного оборудование({value})");
                 }
                 type = value;
                 OnPropertyChanged();
@@ -64,7 +64,7 @@ namespace OfficeHelperWPF1.Models
                     && value != "На складе"
                     && value != "В ремонте")
                 {
-                    throw new Exception($"Вы указали неправильный статус офисного оборудование({value})");
+                    throw new ArgumentException($"Вы указали неправильный статус офисного оборудование({value})");
                 }
                 status = value;
                 OnPropertyChanged();
