@@ -14,26 +14,29 @@
             <Button 
                 Content="Добавить" 
                 Command="{Binding OfficeEquipmentInsertCommand}" 
-                Width="100" 
-                Height="Auto" 
+                Width="120" 
+                Height="40" 
                 DockPanel.Dock="Top"
-                Margin="10"/>
+                Margin="10"
+                FontSize="17"/>
             <Button 
                 Content="Изменить" 
                 Command="{Binding OfficeEquipmentUpdateCommand}" 
                 CommandParameter="{Binding ElementName=OfficeEquipmentDataGrid, Path=SelectedItem}" 
-                Width="100" 
-                Height="Auto" 
+                Width="120" 
+                Height="40" 
                 DockPanel.Dock="Top"
-                Margin="10 0 10 10"/>
+                Margin="10 0 10 10"
+                FontSize="17"/>
             <Button 
                 Content="Удалить" 
                 Command="{Binding OfficeEquipmentDeleteCommand}" 
                 CommandParameter="{Binding ElementName=OfficeEquipmentDataGrid, Path=SelectedItems}"
-                Width="100" 
-                Height="Auto" 
+                Width="120" 
+                Height="40" 
                 DockPanel.Dock="Top"
-                Margin="10 0 10 10"/>
+                Margin="10 0 10 10"
+                FontSize="17"/>
             <Grid></Grid>
         </DockPanel>
         <DataGrid 
@@ -44,6 +47,8 @@
             Width="Auto"
             HeadersVisibility="Column"
             HorizontalAlignment ="Left"
+            MinColumnWidth="50"
+            FontSize="17"
             >
         </DataGrid>
     </DockPanel>
